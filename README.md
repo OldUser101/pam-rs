@@ -10,7 +10,6 @@
 
 Note: Currently only supports basic username/password authentication out-of-the-box.
 
-
 ## Warning
 Environment support through the `env` module is probably broken and should not be used in the current state!
 
