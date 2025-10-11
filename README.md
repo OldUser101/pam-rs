@@ -1,9 +1,12 @@
-# pam - Safe Rust API to the Linux Pluggable Authentication Modules (PAM)
+# pam-rs - An up-to-date fork of [pam](https://github.com/1wilkens/pam)
 
-[![Crates.io](https://img.shields.io/crates/v/pam.svg)](https://crates.io/crates/pam)
-[![Documentation](https://docs.rs/pam/badge.svg)](https://docs.rs/pam/)
-[![Build Status](https://dev.azure.com/1wilkens/ci/_apis/build/status/pam?branchName=master)](https://dev.azure.com/1wilkens/ci/_build/latest?definitionId=2&branchName=master)
-[![License](https://img.shields.io/crates/l/pam.svg?branch=master)](https://travis-ci.org/1wilkens/pam)
+[![Crates.io](https://img.shields.io/crates/v/pam-rs.svg)](https://crates.io/crates/pam-rs)
+[![Documentation](https://docs.rs/pam-rs/badge.svg)](https://docs.rs/pam-rs/)
+![License](https://img.shields.io/crates/l/pam-rs.svg?branch=master)
+
+**Note:** This is an updated fork of the [pam](https://github.com/1wilkens/pam) crate, I am not the original author of this.
+
+***
 
 Note: Currently only supports basic username/password authentication out-of-the-box.
 
@@ -13,10 +16,10 @@ Environment support through the `env` module is probably broken and should not b
 
 
 ## Usage
-1. Add `pam` to your Cargo.toml:
+1. Add `pam-rs` to your Cargo.toml:
 ```toml
 [dependencies]
-pam = "0.7.0"
+pam-rs = "0.7.0"
 ```
 2. Use the `Authenticator` struct to authenticate and open a session
 ```rust

@@ -1,21 +1,16 @@
 [package]
-
-name = "pam"
+name = "pam-rs"
 version = "0.8.0"
-authors = ["Florian Wilkens <gh@1wilkens.org>"]
-description = "Safe Rust wrappers for PAM authentication"
+description = "An up-to-date fork of the `pam` crate."
 license = "MIT OR Apache-2.0"
 categories = ["authentication"]
 
-repository = "https://github.com/1wilkens/pam/"
-documentation = "https://docs.rs/pam/"
+repository = "https://github.com/OldUser101/pam-rs/"
+documentation = "https://docs.rs/pam-rs/"
 readme = "README.md"
 include = [ "LICENSE-*", "README.md", "CHANGELOG.md", "/src", "/examples"  ]
 
 edition = "2018"
-
-[badges]
-azure-devops = { project = "1wilkens/ci", pipeline = "pam" }
 
 [features]
 default = ["client"]
