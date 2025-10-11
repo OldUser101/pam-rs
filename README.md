@@ -19,7 +19,7 @@ Environment support through the `env` module is probably broken and should not b
 1. Add `pam-rs` to your Cargo.toml:
 ```toml
 [dependencies]
-pam-rs = "0.9.0"
+pam-rs = "0.9.1"
 ```
 2. Use the `Authenticator` struct to authenticate and open a session
 ```rust
