@@ -4,7 +4,7 @@
 [![Documentation](https://docs.rs/pam-rs/badge.svg)](https://docs.rs/pam-rs/)
 ![License](https://img.shields.io/crates/l/pam-rs.svg?branch=master)
 
-**Note:** This is an updated fork of the [pam](https://github.com/1wilkens/pam) crate, I am not the original author of this.
+**Note:** This is an updated fork of the [pam](https://github.com/1wilkens/pam) crate, I am not the original author of this crate.
 
 ***
 
@@ -23,13 +23,13 @@ pam-rs = "0.9.0"
 ```
 2. Use the `Authenticator` struct to authenticate and open a session
 ```rust
-extern crate pam;
+extern crate pam_rs;
 pub fn main() {
         let service = "<yourapp>";
         let user = "<user>";
         let password = "<pass>";
 
-        let mut auth = pam::Authenticator::with_password(service).unwrap();
+        let mut auth = pam_rs::Authenticator::with_password(service).unwrap();
         auth.handler_mut().set_credentials(user, password);
         if auth.authenticate().is_ok() && auth.open_session().is_ok() {
             println!("Successfully opened a session!");
