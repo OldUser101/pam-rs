@@ -74,8 +74,8 @@ impl<'a, C: conv::Conversation> Client<'a, C> {
     }
 
     /// Perform authentication with the provided credentials
-    pub fn authenticate(&mut self) -> PamResult<()> {
-        self.last_code = authenticate(self.handle, PamFlag::None);
+    pub fn authenticate(&mut self, flags: PamFlag) -> PamResult<()> {
+        self.last_code = authenticate(self.handle, flags);
         if self.last_code != PamReturnCode::Success {
             // No need to reset here
             return Err(From::from(self.last_code));
@@ -83,7 +83,7 @@ impl<'a, C: conv::Conversation> Client<'a, C> {
 
         self.is_authenticated = true;
 
-        self.last_code = acct_mgmt(self.handle, PamFlag::None);
+        self.last_code = acct_mgmt(self.handle, flags);
         if self.last_code != PamReturnCode::Success {
             // Probably not strictly neccessary but better be sure
             return self.reset();
