@@ -1,6 +1,6 @@
 [package]
 name = "pam-rs"
-version = "0.9.1"
+version = "0.9.2"
 description = "An up-to-date fork of the `pam` crate."
 license = "MIT OR Apache-2.0"
 categories = ["authentication"]
