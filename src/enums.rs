@@ -8,6 +8,7 @@ use pam_macros::pam_enum;
 
 /// The Linux-PAM return values
 #[pam_enum]
+#[cfg(target_os = "linux")]
 pub enum PamReturnCode {
     /// System error
     System_Err,
@@ -104,13 +105,109 @@ pub enum PamReturnCode {
     Bad_Item,
 
     /// conversation function is event driven and data is not available yet
-    #[cfg(target_os = "linux")]
     Conv_Again,
 
     /// please call this function again to complete authentication stack.
     /// Before calling again as isize, verify that conversation is completed
-    #[cfg(target_os = "linux")]
     Incomplete,
+}
+
+#[pam_enum]
+#[cfg(not(target_os = "linux"))]
+pub enum PamReturnCode {
+    /// System error
+    System_Err,
+
+    /// Successful function return
+    Success,
+
+    /// dlopen() failure when dynamically loading a service module
+    Open_Err,
+
+    /// Symbol not found
+    Symbol_Err,
+
+    /// Error in service module
+    Service_Err,
+
+    /// Memory buffer error
+    Buf_Err,
+
+    /// Permission denied
+    Perm_Denied,
+
+    /// Authentication failure
+    Auth_Err,
+
+    /// Can not access authentication data due to insufficient credentials
+    Cred_Insufficient,
+
+    /// Underlying authentication service can not retrieve authentication information
+    Authinfo_Unavail,
+
+    /// User not known to the underlying authentication module
+    User_Unknown,
+
+    /// An authentication service has maintained a retry count which has been reached.
+    /// No further retries should be attempted
+    MaxTries,
+
+    /// New authentication token required.
+    /// This is normally returned if the machine security policies require
+    /// that the password should be changed beccause the password is NULL or it has aged
+    New_Authtok_Reqd,
+
+    /// User account has expired
+    Acct_Expired,
+
+    /// Can not make/remove an entry for the specified session
+    Session_Err,
+
+    /// Underlying authentication service can not retrieve user credentials unavailable
+    Cred_Unavail,
+
+    /// User credentials expired
+    Cred_Expired,
+
+    /// Failure setting user credentials
+    Cred_Err,
+
+    /// No module specific data is present
+    No_Module_Data,
+
+    /// Conversation error
+    Conv_Err,
+
+    /// Authentication token manipulation error
+    AuthTok_Err,
+
+    /// Authentication information cannot be recovered
+    AuthTok_Recovery_Err,
+
+    /// Authentication token lock busy
+    AuthTok_Lock_Busy,
+
+    /// Authentication token aging disabled
+    AuthTok_Disable_Aging,
+
+    /// Preliminary check by password service
+    Try_Again,
+
+    /// Ignore underlying account module regardless of whether
+    /// the control flag is required, optional, or sufficient
+    Ignore,
+
+    /// Critical error (?module fail now request)
+    AuthTok_Expired,
+
+    /// user's authentication token has expired
+    Abort,
+
+    /// module is not known
+    Module_Unknown,
+
+    /// Bad item passed to pam_*_item()
+    Bad_Item,
 }
 
 impl std::fmt::Display for PamReturnCode {
@@ -121,6 +218,7 @@ impl std::fmt::Display for PamReturnCode {
 
 /// The Linux-PAM flags
 #[pam_enum]
+#[cfg(target_os = "linux")]
 pub enum PamFlag {
     /// Default value, if no specific flags should be passed
     None = 0,
@@ -131,7 +229,6 @@ pub enum PamFlag {
     /// The authentication service should return AUTH_ERROR
     /// if the user has a null authentication token
     /// (used by pam_authenticate{,_secondary}())
-    #[cfg(target_os = "linux")]
     Disallow_Null_AuthTok,
 
     /// Set user credentials for an authentication service
@@ -153,12 +250,10 @@ pub enum PamFlag {
     /// The password service should only update those passwords that have aged.
     /// If this flag is not passed, the password service should update all passwords.
     /// (used by pam_chauthtok)
-    #[cfg(target_os = "linux")]
     Change_Expired_AuthTok,
 
     /// The password service should update passwords Note: PAM_PRELIM_CHECK
     /// and PAM_UPDATE_AUTHTOK cannot both be set simultaneously!
-    #[cfg(target_os = "linux")]
     Update_AuthTok,
 
     /// The following two flags are for use across the Linux-PAM/module
@@ -167,8 +262,33 @@ pub enum PamFlag {
     ///
     /// The password service should only perform preliminary checks.  No
     /// passwords should be updated.
-    #[cfg(target_os = "linux")]
     Prelim_Check,
+}
+
+#[pam_enum]
+#[cfg(not(target_os = "linux"))]
+pub enum PamFlag {
+    /// Default value, if no specific flags should be passed
+    None = 0,
+
+    /// Authentication service should not generate any messages
+    Silent,
+
+    /// Set user credentials for an authentication service
+    /// (used for pam_setcred())
+    Establish_Cred,
+
+    /// Delete user credentials associated with an authentication service
+    /// (used for pam_setcred())
+    Delete_Cred,
+
+    /// Reinitialize user credentials
+    /// (used for pam_setcred())
+    Reinitialize_Cred,
+
+    /// Extend lifetime of user credentials
+    /// (used for pam_setcred())
+    Refresh_Cred,
 }
 
 impl std::fmt::Display for PamFlag {
@@ -183,6 +303,7 @@ impl std::fmt::Display for PamFlag {
 /// Please check the spec which are allowed for use by applications
 /// and which are only allowed for use by modules.
 #[pam_enum]
+#[cfg(target_os = "linux")]
 pub enum PamItemType {
     /// The service name
     Service,
@@ -212,20 +333,47 @@ pub enum PamItemType {
     User_Prompt,
 
     /// app supplied function to override failure delays
-    #[cfg(target_os = "linux")]
     Fail_Delay,
 
     /// X display name
-    #[cfg(target_os = "linux")]
     XDisplay,
 
     /// X server authentication data
-    #[cfg(target_os = "linux")]
     XAuthData,
 
     /// The type for pam_get_authtok
-    #[cfg(target_os = "linux")]
     AuthTok_Type,
+}
+
+#[pam_enum]
+#[cfg(not(target_os = "linux"))]
+pub enum PamItemType {
+    /// The service name
+    Service,
+
+    /// The user name
+    User,
+
+    /// The tty name
+    TTY,
+
+    /// The remote host name
+    RHost,
+
+    /// The pam_conv structure
+    Conv,
+
+    /// The authentication token (password)
+    AuthTok,
+
+    /// The old authentication token
+    OldAuthTok,
+
+    /// The remote user name
+    RUser,
+
+    /// the prompt for getting a username Linux-PAM extensions
+    User_Prompt,
 }
 
 impl std::fmt::Display for PamItemType {
